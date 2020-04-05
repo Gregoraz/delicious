@@ -1,0 +1,32 @@
+<script src="{{ asset('build/js/cookie.js') }}"></script>
+
+<div id="cookieDiv" style="border-bottom: 1px solid #ff3622; display: none;" class="alert alert-danger">
+    <div id="closeCookieDiv" style="margin-left: 15%; cursor: pointer;">X</div>
+    <p style="margin-left: 25%">We use cookies to analyse site usage, provide social media features and personalise content.<br> We use also cookies for sessions, to operate user accounts.<br><a href="privacy.php">View our cookies policy</a>. <a id="accept" class="btn btn-primary text-light" style="margin-left: 35%">Accept</a></p>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if (typeof $.cookie('privacy') === 'undefined'){ //When is cookie not accepted then show div cookieDiv
+            $("#cookieDiv").show();
+        }
+        else $("#cookieDiv").hide();
+    });
+
+    $("#closeCookieDiv").click(function(){
+        if (typeof $.cookie('privacy') === 'undefined'){    //When is no cookie
+            $.cookie("privacy", "true");
+
+        }
+        $("#cookieDiv").hide();
+
+    });
+    $("#accept").click(function(){
+        if (typeof $.cookie('privacy') === 'undefined'){    //When is no cookie
+            $.cookie("privacy", "true");    //set cookie privacy
+
+        }
+        $("#cookieDiv").hide();
+    });
+
+</script>

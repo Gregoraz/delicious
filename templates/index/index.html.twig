@@ -1,0 +1,76 @@
+{% extends "base/base.html.twig" %}
+
+{% block title %}{{ parent() }}Order Your Food Without Leaving Home{% endblock %}
+{% block body %}
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row text-center" id="logo-image" style="min-height: 500px;">
+                        <h2 class="text-light bg-primary" style="margin: 250px auto auto;opacity: 0.85">Search nearest Restaurants!</h2>
+                        <div class="col-md-12 mx-auto">
+                            <form id="search" name="search" action="results.php" method="get" class="form-inline mx-auto" autocomplete="off">
+                                <div class="input-group" style="margin: 0px auto;">
+                                    <a id="location" onclick="locate()"><div class="input-group-text">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                 width="24" height="24"
+                                                 viewBox="0 0 48 48"
+                                                 style="enable-background:new 0 0 48 48;; fill:#000000;"><g id="Layer_1"></g><g id="Layer_2"></g><g id="Layer_3">	<path style="fill:#FF3D00;" d="M24,1C15.2,1,6.015,7.988,6,18C5.982,29.981,24,48,24,48s18.019-17.994,18-30   C41.984,8.003,32.8,1,24,1z M24,26c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S28.418,26,24,26z"></path></g></svg>
+
+
+                                        </div></a>
+
+                                    <div id="postcode2" style="margin-bottom: 0px;">
+                                        <input type="text" class="form-control text-left" placeholder="Post code" size="28" name="postcode" id="postcode" pattern="[a-zA-Z0-9 ]+" title="Please enter correct post code!" style="text-transform: uppercase; opacity: 0.85" required></div>
+
+
+                                    <div id="fasearch" class=""><button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button></div>
+
+
+                                </div>
+
+                            </form>
+
+                            <div id="result" class="bg-light text-primary m-auto" style="text-align: left; height: auto; max-height: 100px; overflow-y: scroll; display: none; border-radius: 10px; border-bottom-right-radius: 10px; opacity: 0.8; margin-bottom: 0px;">
+
+                                <?php /*
+                        require('connection.php');
+                        $sql = 'SELECT id,postcode FROM postcodelatlng';
+                        $result = $conn->query($sql);
+                                $i = 0;
+                                while($row = $result->fetch_assoc()) {
+                                if($i == 4) break;
+                                echo '<a href="#">';
+                                    echo $row["postcode"];
+                                    echo '</a>';
+                                echo "<br>";
+                                $i++;
+                                }
+                                */
+                                ?>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <h4 class="alert alert-danger mx-auto postcode-alert">Our service works actually with Worcester postcodes only!</h4>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    {% block buy_steps %}{% include 'index/buy_steps.html.twig' %}{% endblock %}
+    <hr>
+
+    {% block restaurant_mini_gallery %}{% include 'index/restaurant_mini_gallery.html.twig' %}{% endblock %}
+    <hr>
+
+    {% block social_media %}{% include 'index/social_media.html.twig' %}{% endblock %}
+    <hr>
+
+{% endblock %}

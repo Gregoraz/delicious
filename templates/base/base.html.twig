@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/x-icon" href="{{ asset('build/img/favicon.ico') }}" />
+        <title>{% block title %}Delicious - {% endblock %}</title>
+        {% block stylesheets %}{% include 'base/stylesheets.html.twig' %}{% endblock %}
+        {% block javascripts %}{% include 'base/javascripts.html.twig' %}{% endblock %}
+    </head>
+    <body>
+        {% block cookiemsg %}{% include 'base/cookiemsg.html.twig' %}{% endblock %}
+        {% block navbar %}{% include 'navbar/navbar.html.twig' %}{% endblock %}
+        {% block body %}{% endblock %}
+        {% block footer %}{% include 'footer/index.html.twig' %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">Try different tastes from different countries</h2>
+                <h5 class="text-center">Click on image to enlarge</h5>
+                <div class="row">
+                    <div onclick ="deliciousShowModal(this)" class="col-md-3" style="margin-top: 25px;"><img id="myImg" class="img-fluid d-block mt-1" src="{{ asset('build/img/frk_restaurant.jpg') }}" style="border-radius: 5px; cursor: pointer; height: 100%; width: 100%;" alt="Spanish food 1"></div>
+                    <div onclick ="deliciousShowModal(this)" class="col-md-3" style="margin-top: 25px;"><img id="myImg1" class="img-fluid d-block mt-1 imageManipulation" src="{{ asset('build/img/hungarian_food.jpg') }}" style="border-radius: 5px; cursor: pointer; height: 100%; width: 100%;" alt="Hungarian food 1"></div>
+                    <div onclick ="deliciousShowModal(this)" class="col-md-3" style="margin-top: 25px;"><img id="myImg2" class="img-fluid d-block mt-1 imageManipulation" src="{{ asset('build/img/hungarian_food2.jpg') }}" style="border-radius: 5px; cursor: pointer; height: 100%; width: 100%;" alt="Hungarian food 2"></div>
+                    <div onclick ="deliciousShowModal(this)" class="col-md-3" style="margin-top: 25px;"><img id="myImg3" class="img-fluid d-block mt-1 imageManipulation" src="{{ asset('build/img/italian_food.jpg') }}" style="border-radius: 5px; cursor: pointer; height: 100%; width: 100%;" alt="Italian food 1"></div>
+                    <div onclick ="deliciousShowModal(this)" class="col-md-3" style="margin-top: 25px;"><img id="myImg4" class="img-fluid d-block mt-1 imageManipulation" src="{{ asset('build/img/italian_food2.jpg') }}" style="border-radius: 5px; cursor: pointer; height: 100%; width: 100%;" alt="Italian food 2"></div>
+                    <div onclick ="deliciousShowModal(this)" class="col-md-3" style="margin-top: 25px;"><img id="myImg5" class="img-fluid d-block mt-1 imageManipulation" src="{{ asset('build/img/polish_food.jpg') }}" style="border-radius: 5px; cursor: pointer; height: 100%; width: 100%;" alt="Polish food 1"></div>
+                    <div onclick ="deliciousShowModal(this)" class="col-md-3" style="margin-top: 25px;"><img id="myImg6" class="img-fluid d-block mt-1 imageManipulation" src="{{ asset('build/img/polish_food2.jpg') }}" style="border-radius: 5px; cursor: pointer; height: 100%; width: 100%;" alt="Polish food 2"></div>
+                    <div onclick ="deliciousShowModal(this)" class="col-md-3" style="margin-top: 25px;"><img id="myImg7" class="img-fluid d-block mt-1 imageManipulation" src="{{ asset('build/img/spanish_food2.jpg') }}" style="border-radius: 5px; cursor: pointer; height: 100%; width: 100%;" alt="Spanish food 2"></div>
+                </div>
+
+
+
+                <div id="myModal" class="modal">
+
+                    <span class="close" onclick="deliciousHideModal()">&times;</span>
+
+                    <img class="modal-content" id="modal-content" src="{{ asset('build/img/frk_restaurant.jpg') }}" alt="Spanish food 1">
+
+                    <div id="caption"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

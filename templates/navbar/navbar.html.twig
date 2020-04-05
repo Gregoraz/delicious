@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-md navbar-light" id="fontManip">
+    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar6" style="">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar6"> <a class="navbar-brand text-primary d-none d-md-block" href="/">
+                <i class="fa d-inline fa-lg fa-circle"></i>
+                <b> Delicious</b>
+            </a>
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"> <a class="nav-link" href="/">Home</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/contact">Contact</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/privacy">Privacy policy</a> </li>
+            </ul>
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"> <a onclick="zoomFontIn()" class="nav-link">T+</a> </li>
+                <li class="nav-item"> <a onclick="zoomFontOut()" class="nav-link">T-</a> </li>
+            </ul>
+            <ul class="navbar-nav">
+
+                {% if app.user %}
+                <li class="nav-item"> <a class="nav-link" href="/panel">User Panel</a> </li>
+                <li class="nav-item"> <a class="nav-link text-primary" href="/logout">Logout</a></li>
+                {% else %}
+                <li class="nav-item"> <a class="nav-link" href="/login">Log in</a> </li>
+                <li class="nav-item"> <a class="nav-link text-primary" href="/register">Register</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
