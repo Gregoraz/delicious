@@ -33,23 +33,9 @@
                             </form>
 
                             <div id="result" class="bg-light text-primary m-auto" style="text-align: left; height: auto; max-height: 100px; overflow-y: scroll; display: none; border-radius: 10px; border-bottom-right-radius: 10px; opacity: 0.8; margin-bottom: 0px;">
-
-                                <?php /*
-                        require('connection.php');
-                        $sql = 'SELECT id,postcode FROM postcodelatlng';
-                        $result = $conn->query($sql);
-                                $i = 0;
-                                while($row = $result->fetch_assoc()) {
-                                if($i == 4) break;
-                                echo '<a href="#">';
-                                    echo $row["postcode"];
-                                    echo '</a>';
-                                echo "<br>";
-                                $i++;
-                                }
-                                */
-                                ?>
-
+                            {% for postcode in postcodes %}
+                                <a href="#">{{ postcode['postcode'] }}</a><br>
+                            {% endfor %}
 
                             </div>
 

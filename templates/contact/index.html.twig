@@ -1,0 +1,50 @@
+{% extends "base/base.html.twig" %}
+
+{% block title %}{{ parent() }}Contact Us{% endblock %}
+{% block body %}
+
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div id="logo-image" class="col-md-12 w-100"></div>
+        </div>
+    </div>
+</div>
+<div class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 p-4">
+                <h1>Contact us</h1>
+                <p>If you have any questions, please use the contact options available or send us an inquiry via the form on the right.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 p-4">
+                <h3>Contact options</h3>
+                <p>Below are the different departments of our company with whom you can contact.</p>
+
+                <p class="lead mt-3"> <b>General</b> </p>
+                <p> <a href="mailto:contact@pieg1-15.wbs.uni.worc.ac.uk">contact@pieg1-15.wbs.uni.worc.ac.uk</a> </p>
+            </div>
+            <div class="col-md-7 p-4">
+                <h3 class="mb-3">Send us a message</h3>
+                <form action="sendemail.php" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" required> </div>
+                        <div class="form-group col-md-6"> <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" required> </div>
+                    </div>
+                    <div class="form-group"> <input type="text" class="form-control" id="restaurant" name="restaurant" placeholder="Restaurant (if applicable)"> </div>
+                    <div class="form-group"> <input type="email" class="form-control" id="email" name="email" placeholder="Email" required> </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12"> <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone (optional)"> </div>
+                    </div>
+                    <div class="form-group"> <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required> </div>
+                    <div class="form-group"> <textarea class="form-control" id="message" name="message" rows="3" placeholder="Your message" required></textarea> </div> <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
