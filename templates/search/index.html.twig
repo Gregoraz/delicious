@@ -1,0 +1,91 @@
+{% extends "base/base.html.twig" %}
+
+{% block title %}{{ parent() }}Search{% endblock %}
+{% block body %}
+
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 w-100 h-25" id="logo-image"></div>
+        </div>
+    </div>
+</div>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" id="resultForm">
+                <br><br><br>
+                <form action="{{ path('app_search') }}" method="get" class="text-primary">
+                    Postcode:<br>
+                    <input type="text" name="postcode" value="{{ postcode_input }}"><br><br><br>
+                    Distance (0 - filter off):<br>
+                    <input type="number" name="distance" value=""><br><br><br>
+
+                    <input type="radio" name="cuisine" value="any" checked=""> Any<br>
+                    {% for cuisine in cuisines %}
+                        <input type="radio" name="cuisine" value="{{ cuisine.id }}"> {{ cuisine.name|capitalize }}<br>
+                    {% endfor %}
+
+                    <br><br>  Minimal order<br>
+                    <select name="minorder" size="5" style="width: 100%" required="required" class="">
+                        <option value="Any" selected="selected">Any</option>
+                        <option value=3>From £3</option>
+                        <option value=5>From £5</option>
+                        <option value=10>From £10</option>
+                        <option value=15>From £15</option>
+                    </select><br><br><br> Delivery cost:<br>
+                    <select name="deliverycost" size="4" style="width: 100%">
+                        <option value=0>Free</option>
+                        <option value=1>Up to £1</option>
+                        <option value=2>Up to £2</option>
+                        <option value=5>Up to £5</option>
+                    </select>
+                    <br><br>
+                    <div class="text-center">
+                        <input type="submit" value="Filter" class="btn btn-outline-primary text-center" ></div>
+                </form><br><br><br><br><br>
+            </div>
+            <div class="col-md-8" style="overflow-y: scroll; max-height: 1300px;"><div style="text-align: center;"><div>
+                        <a class="btn btn-primary text-center text-light" id="displayFilter">Show filter</a>
+                        <a class="btn btn-primary text-center text-light" id="displayFilter2" style="display: none;">Hide filter</a>
+                        <br><br><br><br></div></div>
+                <h2 class="text-center">Results:</h2>
+
+                <hr>
+
+
+                {% if restaurants|length > 0 %}
+                    <div class="text-center">
+                        <h3 class="alert alert-danger text-center">Found {{ restaurants|length }} restaurants near to {{ postcode_input }}</h3>
+                        <h5 class="alert alert-danger text-center">To sort restaurants by distance use filter first</h5></div>
+                    <hr>
+                    <br><br><br>
+                    {% for restaurant in restaurants %}
+                <div class="card" style="text-align: center">
+                    <div class="card-body" style="">
+                        <h4 style="text-align: center"> Restaurant details </h4><hr>
+                    </div>
+                    <h1 class="card-text">{{ restaurant.name }}</h1>
+                    <h3>X miles away </h3>
+                    <p class="card-text">Average delivery time: {{ restaurant.deliverytime }}</p>
+                    <p class="card-text">Delivery cost: {{ restaurant.deliverycost }}</p>
+                    <p class="card-text">Minimal order: {{ restaurant.minimalorder }}</p>
+                    <p class="card-text">Cuisine: ' {{ restaurant.cuisineid.name }}</p>
+                    <iframe height="220" src="https://maps.google.com/maps?q='.$row["lat"].','.$row["lng"].'&amp;z=14&amp;output=embed"></iframe>
+
+                    <br><br>
+
+                    <a class="btn btn-outline-primary text-center" href="details.php?id='.$row["id"].'&milesaway='.round($coordinates,2).'">Check details</a>
+
+                </div><br><br>
+                    {% endfor %}
+                {% else %}
+                <p class="text-center alert alert-danger">0 results. Try with different filters.</p>;
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}{{ parent() }}{% include 'search/javascripts.html.twig' %}{% endblock %}

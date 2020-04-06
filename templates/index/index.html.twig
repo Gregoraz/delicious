@@ -9,7 +9,7 @@
                     <div class="row text-center" id="logo-image" style="min-height: 500px;">
                         <h2 class="text-light bg-primary" style="margin: 250px auto auto;opacity: 0.85">Search nearest Restaurants!</h2>
                         <div class="col-md-12 mx-auto">
-                            <form id="search" name="search" action="results.php" method="get" class="form-inline mx-auto" autocomplete="off">
+                            <form id="search" name="search" action="{{ path('app_search', {'value': 49699})}}" method="get" class="form-inline mx-auto" autocomplete="off">
                                 <div class="input-group" style="margin: 0px auto;">
                                     <a id="location" onclick="locate()"><div class="input-group-text">
 

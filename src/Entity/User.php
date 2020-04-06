@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -49,21 +50,21 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=255, nullable=false)
+     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
      */
     private $salt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="roles", type="json", length=255, nullable=false)
+     * @ORM\Column(name="roles", type="json", length=255, nullable=true)
      */
-    private $roles = [];
+    private $roles;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="hasRestaurant", type="string", length=10, nullable=false)
+     * @ORM\Column(name="hasRestaurant", type="string", length=10, nullable=true)
      */
     private $hasRestaurant;
 
@@ -83,6 +84,24 @@ class User implements UserInterface, EquatableInterface
      * })
      */
     private $restaurantId;
+
+    /**
+     * @var ArrayCollection $shops
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Restaurant")
+     *   @ORM\JoinTable(name="user_fav_restaurant",
+     *   joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *   inverseJoinColumns={@ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")}
+     *   )
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $favRestaurants;
+
+    public function __construct()
+    {
+        $this->favRestaurants = new ArrayCollection();
+        $this->roles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -161,6 +180,30 @@ class User implements UserInterface, EquatableInterface
         $this->restaurantId = $restaurantId;
 
         return $this;
+    }
+
+    /**
+     * return ArrayCollection
+     */
+    public function getFavRestaurants()
+    {
+        return $this->favRestaurants;
+    }
+
+    /**
+     * @param $favRestaurants
+     */
+    public function setFavRestaurants($favRestaurants)
+    {
+        $this->favRestaurants = $favRestaurants;
+    }
+
+    /**
+     * @param $favRestaurant
+     */
+    public function addShop($favRestaurant)
+    {
+        $this->favRestaurants[] = $favRestaurant;
     }
 
     public function getRoles()
