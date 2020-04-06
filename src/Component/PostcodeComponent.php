@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Component;
+
+use App\Entity\Postcodelatlng;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query;
 
 class PostcodeComponent
 {
@@ -12,7 +13,7 @@ class PostcodeComponent
         $postcodeRepo = $entityManager->getRepository('App\Entity\Postcodelatlng');
         $postcodeObj = $postcodeRepo->findAll();
         $postcodeArray = [];
-        foreach($postcodeObj as $obj) {
+        foreach ($postcodeObj as $obj) {
             $postcodeArray[] = [
                 'id' => $obj->getId(),
                 'postcode' => $obj->getPostcode(),
@@ -21,5 +22,11 @@ class PostcodeComponent
             ];
         }
         return $postcodeArray;
+    }
+
+    public function getPostcodeByPostcode(EntityManager $entityManager, $postcode)
+    {
+        $postcodeRepo = $entityManager->getRepository('App\Entity\Postcodelatlng');
+        return $postcodeRepo->findOneBy(['postcode' => $postcode]);
     }
 }

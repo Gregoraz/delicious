@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-4" id="resultForm">
                 <br><br><br>
-                <form action="{{ path('app_search') }}" method="get" class="text-primary">
+                <form action="{{ path('app_restaurant_details') }}" method="get" class="text-primary">
                     Postcode:<br>
                     <input type="text" name="postcode" value="{{ postcode_input }}"><br><br><br>
                     Distance (0 - filter off):<br>
@@ -71,11 +71,12 @@
                     <p class="card-text">Delivery cost: {{ restaurant.deliverycost }}</p>
                     <p class="card-text">Minimal order: {{ restaurant.minimalorder }}</p>
                     <p class="card-text">Cuisine: ' {{ restaurant.cuisineid.name }}</p>
-                    <iframe height="220" src="https://maps.google.com/maps?q='.$row["lat"].','.$row["lng"].'&amp;z=14&amp;output=embed"></iframe>
+                    <iframe height="220" src="https://maps.google.com/maps?q={{ restaurant.lat }},{{ restaurant.lng }}&amp;z=14&amp;output=embed"></iframe>
 
                     <br><br>
 
-                    <a class="btn btn-outline-primary text-center" href="details.php?id='.$row["id"].'&milesaway='.round($coordinates,2).'">Check details</a>
+{#                    <a class="btn btn-outline-primary text-center" href="details.php?id='.$row["id"].'&milesaway='.round($coordinates,2).'">Check details</a>#}
+                    <a class="btn btn-outline-primary text-center" href="{{ path('app_restaurant_details',{restaurantID: restaurant.id}) }}">Check details</a>
 
                 </div><br><br>
                     {% endfor %}

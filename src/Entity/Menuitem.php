@@ -43,7 +43,7 @@ class Menuitem
     private $price;
 
     /**
-     * @var \Restaurant
+     * @var Restaurant
      *
      * @ORM\ManyToOne(targetEntity="Restaurant")
      * @ORM\JoinColumns({
