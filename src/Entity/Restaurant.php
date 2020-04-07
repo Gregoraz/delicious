@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -106,7 +107,7 @@ class Restaurant
     private $actualdistance;
 
     /**
-     * @var \Cuisine
+     * @var Cuisine
      *
      * @ORM\ManyToOne(targetEntity="Cuisine")
      * @ORM\JoinColumns({
@@ -114,6 +115,7 @@ class Restaurant
      * })
      */
     private $cuisineid;
+
 
     public function getId(): ?int
     {

@@ -12,11 +12,14 @@
     <div class="py-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-4"><a class="btn btn-outline-primary" href="javascript:history.go(-1)">&lt;&lt; Back to results</a></div><br><br><br><br><br>
+                <div class="col-md-4"><a class="btn btn-outline-primary" href="javascript:history.go(-1)">&lt;&lt; Back
+                        to results</a></div>
+                <br><br><br><br><br>
                 <div class="col-md-8">
                     <h1 class="text-center">{{ restaurant.name }}</h1><br><br>
                     <div class="row">
-                        <div class="col-md-4"><img class="img-fluid d-block rounded-circle mx-auto w-75" src="{{ restaurant.image }}" alt="{{ restaurant.name }}"></div>
+                        <div class="col-md-4"><img class="img-fluid d-block rounded-circle mx-auto w-75"
+                                                   src="{{ restaurant.image }}" alt="{{ restaurant.name }}"></div>
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-6">
@@ -39,25 +42,38 @@
                             <br><br>
                             <h3 class="text-center">Contact details</h3>
                             <ul class="">
-                                <li>website: <a href="{{ restaurant.website }}" target="_blank">{{ restaurant.website }}</a></li>
+                                <li>website: <a href="{{ restaurant.website }}"
+                                                target="_blank">{{ restaurant.website }}</a></li>
                                 <li>phone: <a href="tel:{{ restaurant.mobile }}">{{ restaurant.mobile }}</a></li>
                                 <li>email: <a href="{{ restaurant.email }}">{{ restaurant.email }}</a></li>
                             </ul>
-{#                            todo add add to fav functionality#}
-                            {%  if app.user %}
+
+                            {#                            <a class="btn btn-primary btn-lg" href="{{ path('app_panel_add_favorite', {opened_tab: 'favs', restaurant_id: restaurant.id}) }}" role="button" style="margin-left: 20%">Add to favourites</a>#}
+                            {% if app.user %}
                                 <form method="post" action="{{ path('app_panel_add_favorite') }}">
-                                    <input type="hidden" name="opened_tab" value="favs" />
-                                    <input type="hidden" name="restaurantID" value="{{ restaurant.id }}" />
-                                    <button class="btn btn-primary btn-lg" type="submit" style="margin-left: 20%">Add to favourites</button>
+                                    <input type="hidden" name="opened_tab" value="favs"/>
+                                    <input type="hidden" name="restaurantID" value="{{ restaurant.id }}"/>
+                                    <button class="btn btn-primary btn-lg" type="submit" style="margin-left: 20%">Add to
+                                        favourites
+                                    </button>
                                 </form>
-{#                            <a class="btn btn-primary btn-lg" href="{{ path('app_panel_add_favorite', {opened_tab: 'favs', restaurant_id: restaurant.id}) }}" role="button" style="margin-left: 20%">Add to favourites</a>#}
-                            {%  else %}
-                            <p class="alert alert-info">You have to log in first, to add this restaurant to favorites.</p>
-                            <a class="btn btn-primary btn-lg" href="{{ path('app_login')}}" role="button" style="margin-left: 20%">Log in</a>
+                                {% if error %}
+                                    {% for singleError in error %}
+                                        <p class="alert alert-danger">{{ singleError }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            {% else %}
+                                <p class="alert alert-info">You have to log in first, to add this restaurant to
+                                    favorites.</p>
+                                <a class="btn btn-primary btn-lg" href="{{ path('app_login') }}" role="button"
+                                   style="margin-left: 20%">Log in</a>
                             {% endif %}
                         </div>
 
-                        <div class="col-md-4"><iframe width="220" height="220" src="https://maps.google.com/maps?q={{ restaurant.lat }},{{ restaurant.lng }}&amp;z=14&amp;output=embed"></iframe></div>
+                        <div class="col-md-4">
+                            <iframe width="220" height="220"
+                                    src="https://maps.google.com/maps?q={{ restaurant.lat }},{{ restaurant.lng }}&amp;z=14&amp;output=embed"></iframe>
+                        </div>
                     </div>
                 </div>
 
@@ -83,12 +99,14 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {% for menu_item in menu_items %}
                             <tr>
-                                <th scope="row"> '.$i.' </th>
-                                <td>'.$row["name"].'</td>
-                                <td>'.$row["ingredients"].'</td>
-                                <td>£'.$row["price"].'</td>
+                                <th scope="row">{{ loop.index }}</th>
+                                <td>{{ menu_item.name }}</td>
+                                <td>{{ menu_item.ingredients }}</td>
+                                <td>£{{ menu_item.price }}</td>
                             </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

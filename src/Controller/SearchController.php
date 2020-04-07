@@ -19,14 +19,13 @@ class SearchController extends AbstractController
     public function index(Request $request)
     {
         $postcode = $request->query->get('postcode');
-
         $restaurantRepo = $this->getDoctrine()->getRepository('App\Entity\Restaurant');
         $cuisineRepo = $this->getDoctrine()->getRepository('App\Entity\Cuisine');
 
         return $this->render('search/index.html.twig', [
             'postcode_input' => $postcode,
             'restaurants' => $restaurantRepo->findAll(),
-            'cuisines' => $cuisineRepo->findAll()
+            'cuisines' => $cuisineRepo->findAll(),
         ]);
     }
 
@@ -37,12 +36,24 @@ class SearchController extends AbstractController
      */
     public function restaurantDetails(Request $request)
     {
+        $error = $request->query->get('error') ?: null;
+        if($error) {
+            foreach($error as &$singleError) {
+                $singleError = urldecode($singleError);
+            }
+        }
+
+        $menuItemsRepo = $this->getDoctrine()->getRepository('App\Entity\Menuitem');
+
+
         $restaurantID = (int)$request->query->get('restaurantID');
         if($restaurantID) {
             $restaurantRepo = $this->getDoctrine()->getRepository('App\Entity\Restaurant');
             return $this->render('search/restaurant_detail.html.twig', [
                 'restaurant' => $restaurantRepo->findOneBy(['id' => $restaurantID]),
-                'miles_away' => 420
+                'miles_away' => 420,
+                'menu_items' => $menuItemsRepo->findBy(['restaurantid' => $restaurantID]),
+                'error' => $error
             ]);
         } else {
             $this->forward('index');

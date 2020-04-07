@@ -1,0 +1,26 @@
+<div class="alert alert-danger">Actually you dont have any registred restaurant. Fill this form to add new restaurant.</div><br><br><br><br>
+<form id="addrestaurant" name="addrestaurant" action="{{ path('app_panel_add_restaurant') }}" method="post" style="width: 50%; margin-left: 25%; margin-right:25%;">
+
+    <div class="form-group"> <label>Restaurant name</label> <input type="text" class="form-control" value="" name="restaurantName" id="restaurantName"  maxlength="140" required>  </div>
+    <div class="form-group"> <label>Link to image (with ex. http://image.com/image.jpg)</label> <input type="url" class="form-control" value="" name="imageLink" id="imageLink" required>  </div>
+    <div class="form-group"> <label>Cuisine</label><br>
+        <select name="cuisine" id="cuisine" size="3" style="width: 100%" required>
+            {% for cuisine in cuisines %}
+                <option value={{ cuisine.id }}>{{ cuisine.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group"> <label>Lat</label> <input type="text" class="form-control" value="" name="lat" id="lat" maxlength="30" required>  </div>
+    <div class="ford group">
+        <label>Too se what is localization of your restaurant (lat and lng) <a href="https://www.latlong.net/" target="_blank">click here</a></label><br><br></div>
+    <div class="form-group"> <label>Lng</label> <input type="text" class="form-control" value="" name="lng" id="lng"  maxlength="30" required>  </div>
+    <div class="ford group">
+        <label>Too se what is localization of your restaurant (lat and lng) <a href="https://www.latlong.net/" target="_blank">click here</a></label><br><br></div>
+    <div class="form-group"> <label>Delivery time</label> <input type="number" class="form-control" value="" name="deliveryTime" id="deliveryTime" min="1" max="200" title="Rage: 1-200" required>  </div>
+    <div class="form-group"> <label>Delivery cost</label> <input type="number" class="form-control" value="" name="deliveryCost" id="deliveryCost" min="0" max="50" title="Rage: 0-50" required>  </div>
+    <div class="form-group"> <label>Minimal order</label> <input type="number" class="form-control" value="" name="minimalOrder" id="minimalOrder" min="0" max="50" required>  </div>
+    <div class="form-group"> <label>Website</label> <input type="url" class="form-control" value="" name="website" id="website" required>  </div>
+    <div class="form-group"> <label>Email</label> <input type="email" class="form-control" name="email" id="email" value="{{ app.user.email }}" readonly="readonly">  </div>
+    <div class="form-group"> <label>Mobile</label> <input type="tel" class="form-control" value="" name="mobile" id="mobile" required>  </div>
+    <button type="submit" class="btn btn-primary">Add restaurant</button>
+</form>

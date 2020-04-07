@@ -20,7 +20,7 @@
                     <td>{{ restaurant.name }}</td>
                     <td><a href="{{ restaurant.website }}">{{ restaurant.website }}</a></td>
                     <td>{{ restaurant.mobile }}</td>
-                    <td><a href="{{ path('app_panel_index') }}">Delete</a></td>
+                    <td><a href="{{ path('app_panel_delete_favorite', {restaurantID: restaurant.id}) }}">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -1,6 +1,51 @@
 {% extends "base/base.html.twig" %}
 
-{% block title %}{{ parent() }}Panel - Edit - NameOfRestaurant{% endblock %}
+{% block title %}{{ parent() }}Panel - Edit - {{ app.user.restaurantId.name }}{% endblock %}
 {% block body %}
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 w-100 h-25" id="logo-image"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>Edit restaurant</h2>
+                    <p><a href="{{ path('app_panel_index') }}">go back</a></p><hr><br><br>
+
+                    <form id="editrestaurant" name="editrestaurant" action="{{ path('app_edit_restaurant_process') }}" method="post" style="width: 50%; margin-left: 25%; margin-right:25%;">
+                        <div class="form-group"> <label>Restaurant name</label> <input type="text" class="form-control" value="{{ app.user.restaurantId.name }}" name="restaurantName" id="restaurantName"  maxlength="140" required>  </div>
+                        <div class="form-group"> <label>Link to image (with ex. http://image.com/image.jpg)</label> <input type="url" class="form-control" value="{{ app.user.restaurantId.image }}" name="imageLink" id="imageLink" required>  </div>
+                        <div class="form-group"> <label>Cuisine</label><br>
+                            <select name="cuisine" id="cuisine" size="7" style="width: 100%" required>';
+                                {% for cuisine in cuisines %}
+                                    <option value={{ cuisine.id }} {% if app.user.restaurantId.cuisineid.id == cuisine.id %}selected="selected"{% endif %}>{{ cuisine.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group"> <label>Lat</label> <input type="text" class="form-control" value="{{ app.user.restaurantId.lat }}" name="lat" id="lat"  maxlength="50" required>  </div>
+                        <div class="ford group">
+                            <label>Too se what is localization of your restaurant (lat and lng) <a href="https://www.latlong.net/" target="_blank">click here</a></label><br><br></div>
+
+                        <div class="form-group"> <label>Lng</label> <input type="text" class="form-control" value="{{ app.user.restaurantId.lng }}" name="lng" id="lng"  maxlength="50" required>  </div>
+                        <div class="ford group">
+                            <label>Too se what is localization of your restaurant (lat and lng) <a href="https://www.latlong.net/" target="_blank">click here</a></label><br><br></div>
+
+                        <div class="form-group"> <label>Delivery time</label> <input type="number" class="form-control" value="{{ app.user.restaurantId.deliverytime }}" name="deliveryTime" id="deliveryTime"  min="1" max="200" required>  </div>
+                        <div class="form-group"> <label>Delivery cost</label> <input type="number" class="form-control" value="{{ app.user.restaurantId.deliverycost }}" name="deliveryCost" id="deliveryCost" min="0" max="50" required>  </div>
+                        <div class="form-group"> <label>Minimal order</label> <input type="number" class="form-control" value="{{ app.user.restaurantId.minimalorder }}" name="minimalOrder" id="minimalOrder" min="0" max="50" required>  </div>
+                        <div class="form-group"> <label>Website</label> <input type="url" class="form-control" value="{{ app.user.restaurantId.website }}" name="website" id="website" required>  </div>
+                        <div class="form-group"> <label>Email</label> <input type="text" class="form-control" value="{{ app.user.restaurantId.email }}" name="email" id="email" required>  </div>
+                        <div class="form-group"> <label>Mobile</label> <input type="tel" class="form-control" value="{{ app.user.restaurantId.mobile }}" name="mobile" id="mobile" pattern="[0-9]+" title="Please enter vaild number!" required>  </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

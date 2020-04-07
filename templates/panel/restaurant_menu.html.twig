@@ -1,0 +1,32 @@
+<a class="btn btn-primary" href="{{ path('app_panel_add_menuitem') }}" role="button">+ add new menu
+    item</a><br><br><br>
+<div class="col-md-12" style="overflow-y: scroll; max-height: 1000">
+    <div class="table-responsive">
+        <table class="table table-striped table-borderless">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Meal name</th>
+                <th scope="col">Ingredients</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if menuitems|length > 0 %}
+            {% for menuitem in menuitems %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ menuitem.name }}</td>
+                <td>{{ menuitem.ingredients }}</td>
+                <td>{{ menuitem.price }}</td>
+                <td><a href="{{ path('app_panel_edit_menuitem', {'menu_item_id': menuitem.id}) }}">Edit</a> | <a href="{{ path('app_panel_delete_menuitem', {'menu_item_id': menuitem.id}) }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <p>You dont have any menu items. Please add some first!</p>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>

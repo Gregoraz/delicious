@@ -43,12 +43,8 @@ class Menuitem
     private $price;
 
     /**
-     * @var Restaurant
-     *
-     * @ORM\ManyToOne(targetEntity="Restaurant")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="restaurantID", referencedColumnName="id")
-     * })
+     * @var int
+     * @ORM\Column(name="restaurantid", type="integer", nullable=true)
      */
     private $restaurantid;
 
@@ -93,15 +89,14 @@ class Menuitem
         return $this;
     }
 
-    public function getRestaurantid(): ?Restaurant
+    public function getRestaurantid(): ?int
     {
         return $this->restaurantid;
     }
 
-    public function setRestaurantid(?Restaurant $restaurantid): self
+    public function setRestaurantid(?int $restaurantid): self
     {
         $this->restaurantid = $restaurantid;
-
         return $this;
     }
 

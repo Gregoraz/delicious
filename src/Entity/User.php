@@ -201,10 +201,11 @@ class User implements UserInterface, EquatableInterface
     /**
      * @param $favRestaurant
      */
-    public function addShop($favRestaurant)
+    public function addFavRestaurant($favRestaurant)
     {
         $this->favRestaurants[] = $favRestaurant;
     }
+
 
     public function getRoles()
     {
