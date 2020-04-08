@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h2>Edit profile - {{ app.user.email }}</h2>
-                    <p><a href="{{ path('app_panel_index') }}">go back</a></p><hr><br><br>
+                    <p><a href="{{ path('app_panel_index', {'opened_tab': 'profile'}) }}">go back</a></p><hr><br><br>
 
                     <form id="editprofile" name="editprofile" action="{{ path('app_edit_profile_process') }}" method="post" style="width: 50%; margin-left: 25%; margin-right:25%;">
                         <div class="form-group"> <label>User name</label> <input type="text" class="form-control" value="{{ app.user.email }}" name="email" id="email" readonly="readonly" required="required">  </div>

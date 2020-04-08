@@ -29,4 +29,5 @@ class PostcodeComponent
         $postcodeRepo = $entityManager->getRepository('App\Entity\Postcodelatlng');
         return $postcodeRepo->findOneBy(['postcode' => $postcode]);
     }
+
 }

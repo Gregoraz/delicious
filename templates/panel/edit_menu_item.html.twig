@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <h2>Edit menu item</h2>
-                <p><a href="{{ path('app_panel_index') }}">go back</a></p><hr><br><br>
+                <p><a href="{{ path('app_panel_index', {'opened_tab': 'restaurant_menu'}) }}">go back</a></p><hr><br><br>
                 <form id="editmenuitem" name="editmenuitem" action="{{ path('app_panel_edit_menuitem_process') }}" method="post" style="width: 50%; margin-left: 25%; margin-right:25%;">
                     <div class="form-group" style="display:none"> <label></label> <input type="number" class="form-control" value="{{ menuitem.id }}" name="mealID" id="mealID" required></div>
                     <div class="form-group"> <label>Meal name</label> <input type="text" class="form-control" value="{{ menuitem.name }}" name="mealName" id="mealName" minlength="3" maxlength="20" required>  </div>

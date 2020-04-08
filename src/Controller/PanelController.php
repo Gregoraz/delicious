@@ -65,6 +65,7 @@ class PanelController extends AbstractController
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('app_panel_index', [
+            'opened_tab' => 'restaurant_details',
             'success' => 'Restaurant details has been changed!'
         ]);
     }
@@ -94,6 +95,7 @@ class PanelController extends AbstractController
             $errorMsg = 'Restaurant cannot be found...';
         }
         return $this->redirectToRoute('app_panel_index', [
+            'opened_tab' => 'restaurant_details',
             'success' => $successMsg,
             'error' => $errorMsg
         ]);
@@ -148,6 +150,7 @@ class PanelController extends AbstractController
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('app_panel_index', [
+            'opened_tab' => 'restaurant_details',
             'success' => 'Restaurant has been added!'
         ]);
     }
@@ -207,6 +210,7 @@ class PanelController extends AbstractController
         }
 
         return $this->redirectToRoute('app_panel_index', [
+            'opened_tab' => 'profile',
             'error' => $errorMsg,
             'success' => $successMsg
         ]);
@@ -249,7 +253,8 @@ class PanelController extends AbstractController
             if ($hasAlreadyFav) $errorMsg[] = 'You have this restaurant already in your favorites!';
 
         }
-        return $this->redirectToRoute('app_restaurant_details', [
+        return $this->redirectToRoute('app_panel_index', [
+            'opened_tab' => 'fav',
             'restaurantID' => $restaurantID,
             'error' => $errorMsg,
         ]);
@@ -271,7 +276,7 @@ class PanelController extends AbstractController
 
         if ($restaurantID && $userEmail && $userObj) {
             $userFavRestaurants = $userObj->getFavRestaurants();
-            for ($i = 0, $iMax = count($userFavRestaurants) - 1; $i < $iMax; $i++) {
+            for ($i = 0, $iMax = count($userFavRestaurants); $i < $iMax; $i++) {
                 if ($userFavRestaurants[$i]->getId() === $restaurantID) {
                     unset($userFavRestaurants[$i]);
                     $successMsg = 'Restaurant has been removed from favorites!';
@@ -373,8 +378,8 @@ class PanelController extends AbstractController
             $errorMsg = 'You dont have restaurant, add restaurant first!';
         }
 
-        return $this->render('panel/index.html.twig', [
-            'opened_tab' => 'none',
+        return $this->redirectToRoute('app_panel_index', [
+            'opened_tab' => 'restaurant_menu',
             'error' => $errorMsg,
             'success' => $successMsg,
             'cuisines' => $this->getDoctrine()->getRepository('App\Entity\Cuisine')->findAll(),
@@ -411,6 +416,7 @@ class PanelController extends AbstractController
             $errorMsg = 'Your are missing parameters. Please fill out every field in menu item';
         }
         return $this->redirectToRoute('app_panel_index', [
+            'opened_tab' => 'restaurant_menu',
             'success' => $successMsg,
             'error' => $errorMsg
         ]);
@@ -450,6 +456,7 @@ class PanelController extends AbstractController
         }
 
         return $this->redirectToRoute('app_panel_index', [
+            'opened_tab' => 'restaurant_menu',
             'error' => $errorMsg,
             'success' => $successMsg,
         ]);

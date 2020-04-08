@@ -24,7 +24,7 @@ class Postcodelatlng
     /**
      * @var string
      *
-     * @ORM\Column(name="postcode", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="postcode", type="text", length=10, nullable=false)
      */
     private $postcode;
 

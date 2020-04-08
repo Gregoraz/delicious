@@ -12,13 +12,16 @@ class SearchController extends AbstractController
 {
 
     /**
-     * @Route("/search", methods={"GET"}, name="app_search")
+     * @Route("/search", methods={"GET", "POST"}, name="app_search")
      * @param Request $request
      * @return Response
      */
     public function index(Request $request)
     {
-        $postcode = $request->query->get('postcode');
+        $postcode = $request->request->get('postcode');
+        $lat = $request->request->get('lat');
+        $lng = $request->request->get('lng');
+
         $restaurantRepo = $this->getDoctrine()->getRepository('App\Entity\Restaurant');
         $cuisineRepo = $this->getDoctrine()->getRepository('App\Entity\Cuisine');
 
@@ -26,11 +29,13 @@ class SearchController extends AbstractController
             'postcode_input' => $postcode,
             'restaurants' => $restaurantRepo->findAll(),
             'cuisines' => $cuisineRepo->findAll(),
+            'userLat' => $lat,
+            'userLng' => $lng
         ]);
     }
 
     /**
-     * @Route("/search/restaurant", methods={"GET"}, name="app_restaurant_details")
+     * @Route("/search/restaurant", methods={"GET", "POST"}, name="app_restaurant_details")
      * @param Request $request
      * @return Response
      */
@@ -45,19 +50,19 @@ class SearchController extends AbstractController
 
         $menuItemsRepo = $this->getDoctrine()->getRepository('App\Entity\Menuitem');
 
+        $restaurantID = (int)$request->request->get('restaurantID');
+        $milesAray = (float)$request->request->get('miles_away');
 
-        $restaurantID = (int)$request->query->get('restaurantID');
         if($restaurantID) {
             $restaurantRepo = $this->getDoctrine()->getRepository('App\Entity\Restaurant');
             return $this->render('search/restaurant_detail.html.twig', [
                 'restaurant' => $restaurantRepo->findOneBy(['id' => $restaurantID]),
-                'miles_away' => 420,
+                'miles_away' => $milesAray,
                 'menu_items' => $menuItemsRepo->findBy(['restaurantid' => $restaurantID]),
                 'error' => $error
             ]);
         } else {
             $this->forward('index');
         }
-
     }
 }

@@ -29,12 +29,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    {% include 'panel/panel_navbar.html.twig' %}
+                    {% include 'panel/panel_navbar.html.twig' with {'opened_tab' : opened_tab} %}
                     <br><br><br><br><br>
                 </div>
                 <div class="col-md-8" style="text-align: center;">
                     <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
+                        <div class="tab-pane fade {% if opened_tab == 'profile' or opened_tab == null %}show active{% endif %}" id="v-pills-profile" role="tabpanel"
                              aria-labelledby="v-pills-profile-tab">
                             <h2>Profile Details</h2>
                             <p><a href="{{ path('app_edit_profile') }}">Edit profile</a></p>
@@ -50,7 +50,7 @@
 
                         {% block fav_restaurants %}{% include 'panel/fav_restaurants.html.twig' %}{% endblock %}
 
-                        <div class="tab-pane fade" id="v-pills-restaurant" role="tabpanel"
+                        <div class="tab-pane fade {% if opened_tab == 'restaurant_details' %}show active{% endif %}" id="v-pills-restaurant" role="tabpanel"
                              aria-labelledby="v-pills-restaurant-tab">
                             <h2>Restaurant details</h2>
                             <hr>
@@ -64,7 +64,7 @@
                             {% endif %}
 
                         </div>
-                        <div class="tab-pane fade" id="v-pills-menu" role="tabpanel" aria-labelledby="v-pills-menu-tab">
+                        <div class="tab-pane fade {% if opened_tab == 'restaurant_menu' %}show active{% endif %}" id="v-pills-menu" role="tabpanel" aria-labelledby="v-pills-menu-tab">
                             <h2>Restaurant menu</h2>
                             <hr>
                             <br><br>

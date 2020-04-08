@@ -9,7 +9,7 @@
                     <div class="row text-center" id="logo-image" style="min-height: 500px;">
                         <h2 class="text-light bg-primary" style="margin: 250px auto auto;opacity: 0.85">Search nearest Restaurants!</h2>
                         <div class="col-md-12 mx-auto">
-                            <form id="search" name="search" action="{{ path('app_search', {'value': 49699})}}" method="get" class="form-inline mx-auto" autocomplete="off">
+                            <form id="search" name="search" action="{{ path('app_search')}}" method="post" class="form-inline mx-auto" autocomplete="off">
                                 <div class="input-group" style="margin: 0px auto;">
                                     <a id="location" onclick="locate()"><div class="input-group-text">
 
@@ -22,7 +22,9 @@
                                         </div></a>
 
                                     <div id="postcode2" style="margin-bottom: 0px;">
-                                        <input type="text" class="form-control text-left" placeholder="Post code" size="28" name="postcode" id="postcode" pattern="[a-zA-Z0-9 ]+" title="Please enter correct post code!" style="text-transform: uppercase; opacity: 0.85" required></div>
+                                        <input type="text" class="form-control text-left" placeholder="Post code" size="28" max="8" name="postcode" id="postcode" pattern="[a-zA-Z0-9 ]+" title="Please enter correct post code!" style="text-transform: uppercase; opacity: 0.85" required></div>
+                                        <input type="hidden" name="lat" id="lat">
+                                        <input type="hidden" name="lng" id="lng">
 
 
                                     <div id="fasearch" class=""><button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button></div>
@@ -44,7 +46,10 @@
 
 
                 </div>
-                <h4 class="alert alert-danger mx-auto postcode-alert">Our service works actually with Worcester postcodes only!</h4>
+                <div class="alert alert-info mx-auto postcode-alert">
+                    <h4>Our service works actually with Worcester postcodes only!</h4>
+                    <h3 class="text-center">Example: WR11NS, WR12DY, WR26JA, WR51DD</h3>
+                </div>
             </div>
         </div>
     </div>
@@ -60,3 +65,5 @@
     <hr>
 
 {% endblock %}
+
+{% block javascripts %}{{ parent() }}{% include 'index/javascripts.html.twig' %}{% endblock %}
