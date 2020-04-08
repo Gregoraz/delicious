@@ -42,7 +42,7 @@ const writePostcode = idContent => {
 
     $('#postcode').keyup();
 };
-    
+
 
     
     
