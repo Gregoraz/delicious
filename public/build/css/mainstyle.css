@@ -11,6 +11,13 @@ html {
     width: device-width;
 }
 
+.panel-action {
+    float: left;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
 
 .fontManipulation {
     cursor: pointer;

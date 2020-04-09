@@ -12,10 +12,10 @@
     <div class="py-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 text-center" style="text">
 
                     <h2 class="text-center">Logged as: {{ app.user.email }} | <a
-                                href="{{ path('app_logout') }}">logout</a></h2>
+                                href="{{ path('app_logout') }}">logout</a></h2><br>
                     {% if error %}
                     <p class="text-center alert alert-danger"><i class="fas fa-info-circle"></i> {{ error }}</p>
                     {% elseif success %}
@@ -25,14 +25,14 @@
             </div>
         </div>
     </div>
-    <div class="py-5">
+    <div class="">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     {% include 'panel/panel_navbar.html.twig' with {'opened_tab' : opened_tab} %}
                     <br><br><br><br><br>
                 </div>
-                <div class="col-md-8" style="text-align: center;">
+                <div class="col-md-10" style="text-align: center;">
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade {% if opened_tab == 'profile' or opened_tab == null %}show active{% endif %}" id="v-pills-profile" role="tabpanel"
                              aria-labelledby="v-pills-profile-tab">
@@ -40,12 +40,11 @@
                             <p><a href="{{ path('app_edit_profile') }}">Edit profile</a></p>
                             <hr>
                             <br><br>
-                            <h5>User name:</h5>
-                            <p>{{ app.user.email }}</p>
-                            <h5>Password:</h5>
-                            <p>Your password is hashed in bcrypt algorithm</p>
-                            <h5>Restaurant owner?</h5>
-                            <p>{% if app.user.hasRestaurant == 1 %} Yes {% else %} No {% endif %}</p>
+                            <div class="text-left" style="margin-left: 100px; font-size: x-large">
+                            <span style="display: inline-block; width: 250px">User name: </span><span>{{ app.user.email }}</span><br>
+                            <span style="display: inline-block; width: 250px">Password: </span><span>********</span><br>
+                            <span style="display: inline-block; width: 250px">Restaurant owner? </span><span>{% if app.user.hasRestaurant == 1 %}Yes{% else %} No {% endif %}</span><br>
+                            </div>
                         </div>
 
                         {% block fav_restaurants %}{% include 'panel/fav_restaurants.html.twig' %}{% endblock %}
@@ -69,7 +68,7 @@
                             <hr>
                             <br><br>
                             {% if app.user.hasRestaurant == false %}
-                                <p>This section is available for restaurant owners only. You can change it in profile
+                                <p class="alert alert-danger">This section is available for restaurant owners only. You can change it in profile
                                     edit
                                     section.</p>
                             {% elseif app.user.restaurantId == '' or app.user.restaurantId == null %}

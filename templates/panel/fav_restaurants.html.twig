@@ -17,10 +17,15 @@
             {% for restaurant in app.user.favRestaurants %}
                 <tr>
                     <th scope="row">{{ loop.index }}</th>
-                    <td>{{ restaurant.name }}</td>
-                    <td><a href="{{ restaurant.website }}">{{ restaurant.website }}</a></td>
-                    <td>{{ restaurant.mobile }}</td>
-                    <td><a href="{{ path('app_panel_delete_favorite', {restaurantID: restaurant.id}) }}">Delete</a></td>
+                    <td class="text-left">{{ restaurant.name }}</td>
+                    <td class="text-left"><a href="{{ restaurant.website }}">{{ restaurant.website }}</a></td>
+                    <td class="text-left">{{ restaurant.mobile }}</td>
+                    <td>
+                        <form class="form-inline panel-action" method="post" action="{{ path('app_panel_delete_favorite') }}">
+                            <input type="hidden" name="restaurantID" value="{{ restaurant.id }}" />
+                            <button type="submit" class="btn btn-outline-primary btn-sm">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

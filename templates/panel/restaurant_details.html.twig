@@ -1,29 +1,27 @@
-<p><a class="btn btn-primary" href="{{ path('app_panel_edit_restaurant') }}" role="button">Edit restaurant details</a></p>
-<br><br><br>
-<h5>Restaurant name:</h5>
-<p>{{ app.user.restaurantId.name }}</p>
-<h5>Logo:</h5>
-<p><img class="img-fluid d-block rounded-circle mx-auto w-25" src="{{ app.user.restaurantId.image }}" width="100" height="100"
-    alt="{{ app.user.restaurantId.name }}"></p><br>
-<h5>Cuisine:</h5>
-<p>{{ app.user.restaurantId.cuisineid.name }}</p>
-<h5>Lat:</h5>
-<p>{{ app.user.restaurantId.lat }}</p>
-<h5>Lng:</h5>
-<p>{{ app.user.restaurantId.lat }}</p>
-<h5>Delivery time:</h5>
-<p>{{ app.user.restaurantId.deliverytime }}</p>
-<h5>Delivery cost:</h5>
-<p>{{ app.user.restaurantId.deliverycost }}</p>
-<h5>Minimal order:</h5>
-<p>{{ app.user.restaurantId.minimalorder }}</p>
-<h5>Website:</h5>
-<p>{{ app.user.restaurantId.website }}</p>
-<h5>Email:</h5>
-<p>{{ app.user.restaurantId.email }}</p>
-<h5>Mobile number:</h5>
-<p>{{ app.user.restaurantId.mobile }}</p><br><br>
-<form method="post" action="{{ path('app_panel_delete_restaurant') }}">
-    <input type="hidden" value="{{ app.user.restaurantId.id }}" name="restaurantID">
-    <button class="btn btn-primary" type="submit" onclick="return confirm('Do you really want to delete {{ app.user.restaurantId.name }} restaurant?')">Delete this restaurant</button>
-</form>
+<div class="restaurant-details text-left" style="margin-left: 30px">
+    <span style="margin-left: 25%; margin-right: 25%">
+        <a class="btn btn-primary" href="{{ path('app_panel_edit_restaurant') }}" role="button">Edit restaurant details</a>
+    </span>
+    <br><br><br>
+    <span style="width: 200px; display: inline-block">Restaurant name: </span><span style="width: 200px; display: inline-block">{{ app.user.restaurantId.name }}</span><br>
+    <span style="width: 200px; display: inline-block">Logo: </span><span style="float: right">
+        <img style="border-radius: 5px"
+             src="{{ app.user.restaurantId.image }}"
+             width="150"
+             height="150"
+             alt="{{ app.user.restaurantId.name }}"></span><br>
+
+    <span style="width: 200px; display: inline-block">Cuisine: </span><span style="width: 200px; display: inline-block">{{ app.user.restaurantId.cuisineid.name }}</span><br>
+    <span style="width: 200px; display: inline-block">Lat: </span><span style="width: 200px; display: inline-block">{{ app.user.restaurantId.lat }}</span><br>
+    <span style="width: 200px; display: inline-block">Lng: </span><span style="width: 200px; display: inline-block">{{ app.user.restaurantId.lat }}</span><br>
+    <span style="width: 200px; display: inline-block">Delivery time: </span><span style="width: 200px; display: inline-block">{{ app.user.restaurantId.deliverytime }}</span><br>
+    <span style="width: 200px; display: inline-block">Delivery cost: </span><span style="width: 200px; display: inline-block">{{ app.user.restaurantId.deliverycost }}</span><br>
+    <span style="width: 200px; display: inline-block">Minimal order: </span><span style="width: 200px; display: inline-block">{{ app.user.restaurantId.minimalorder }}</span><br>
+    <span style="width: 200px; display: inline-block">Website: </span><span style="width: 200px; display: inline-block">{{ app.user.restaurantId.website }}</span><br>
+    <span style="width: 200px; display: inline-block">Email: </span><span style="width: 200px; display: inline-block">{{ app.user.restaurantId.email }}</span><br>
+    <span style="width: 200px; display: inline-block">Mobile number: </span><span style="width: 200px; display: inline-block">{{ app.user.restaurantId.mobile }}</span><br><br><br>
+    <form method="post" action="{{ path('app_panel_delete_restaurant') }}" style="margin-right: 25%; margin-left: 25%">
+        <input type="hidden" value="{{ app.user.restaurantId.id }}" name="restaurantID">
+        <button class="btn btn-primary" type="submit" onclick="return confirm('Do you really want to delete {{ app.user.restaurantId.name }} restaurant?')">Delete this restaurant</button>
+    </form><br><br><br>
+</div>

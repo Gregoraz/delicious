@@ -30,7 +30,7 @@ class PanelController extends AbstractController
             'success' => $success,
             'error' => $error,
             'cuisines' => $this->getDoctrine()->getRepository('App\Entity\Cuisine')->findAll(),
-            'menuitems' => $this->getDoctrine()->getRepository('App\Entity\Menuitem')->findBy(['restaurantid' => $userObj->getRestaurantId()->getId()])
+            'menuitems' => $userObj->getRestaurantId() ? $this->getDoctrine()->getRepository('App\Entity\Menuitem')->findBy(['restaurantid' => $userObj->getRestaurantId()->getId()]) : null
         ]);
     }
 
@@ -261,13 +261,13 @@ class PanelController extends AbstractController
     }
 
     /**
-     * @Route("/panel/deleteFavRestaurant", methods={"GET"}, name="app_panel_delete_favorite")
+     * @Route("/panel/deleteFavRestaurant", methods={"POST"}, name="app_panel_delete_favorite")
      * @param Request $request
      * @return Response
      */
     public function deleteRestaurantFromFavorites(Request $request)
     {
-        $restaurantID = (int)$request->query->get('restaurantID');
+        $restaurantID = (int)$request->request->get('restaurantID');
         $userEmail = $this->getUser()->getEmail();
         $userObj = $this->getDoctrine()->getRepository('App\Entity\User')->findOneBy(['email' => $userEmail]);
 
@@ -312,7 +312,7 @@ class PanelController extends AbstractController
     }
 
     /**
-     * @Route("/panel/editMenuItem", methods={"GET"}, name="app_panel_edit_menuitem")
+     * @Route("/panel/editMenuItem", methods={"POST"}, name="app_panel_edit_menuitem")
      * @param Request $request
      * @return Response
      */
@@ -320,7 +320,7 @@ class PanelController extends AbstractController
     {
         $userObj = $this->getDoctrine()->getRepository('App\Entity\User')->findOneBy(['email' => $this->getUser()->getEmail()]);
         $restaurantID = $userObj->getRestaurantId()->getId();
-        $menuItemID = (int)$request->query->get('menu_item_id');
+        $menuItemID = (int)$request->request->get('menu_item_id');
         $menuItemObj = null;
 
         if ($restaurantID && $menuItemID) {
@@ -423,7 +423,7 @@ class PanelController extends AbstractController
     }
 
     /**
-     * @Route("/panel/deleteMenuItem", methods={"GET"}, name="app_panel_delete_menuitem")
+     * @Route("/panel/deleteMenuItem", methods={"POST"}, name="app_panel_delete_menuitem")
      * @param Request $request
      * @return Response
      */
@@ -434,7 +434,7 @@ class PanelController extends AbstractController
 
         $userObj = $this->getDoctrine()->getRepository('App\Entity\User')->findOneBy(['email' => $this->getUser()->getEmail()]);
         $restaurantID = $userObj->getRestaurantId()->getId();
-        $menuItemID = (int)$request->query->get('menu_item_id');
+        $menuItemID = (int)$request->request->get('menu_item_id');
 
         if ($restaurantID && $menuItemID) {
             $menuItemObj = $this->getDoctrine()->getRepository('App\Entity\Menuitem')->findOneBy(['id' => $menuItemID]);
@@ -459,7 +459,7 @@ class PanelController extends AbstractController
             'opened_tab' => 'restaurant_menu',
             'error' => $errorMsg,
             'success' => $successMsg,
-        ]);
+        ], 307);
     }
 
 }
